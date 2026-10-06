@@ -40,7 +40,7 @@
                 <svg viewBox="0 0 24 24" aria-hidden="true">
                     <path d="M3 4h2l2.1 10.1a2 2 0 0 0 2 1.6h8.7a2 2 0 0 0 1.9-1.4L22 8H6" />
                     <path d="M9 19h.01M18 19h.01" />
-                    <path d="M8 11h11M10 8l1 7M16 8l-1 7" />
+                    <path d="M8 11h11M10 8l-1 7M16 8l-1 7" />
                 </svg>
 
             </a>
@@ -162,7 +162,7 @@
 
                     <label>
 
-                        <input type="radio" name="pagamento" value="pix">
+                        <input type="radio" name="pagamento" value="pix" id="pix">
 
                         PIX
 
@@ -171,15 +171,66 @@
                 </div>
 
 
+                <div id="dados-pix" class="dados-pagamento">
+
+                    <p>Após finalizar o pedido, você receberá as informações para pagamento via PIX.</p>
+
+                </div>
+
+
                 <div class="pagamento-opcao">
 
                     <label>
 
-                        <input type="radio" name="pagamento" value="cartao">
+                        <input type="radio" name="pagamento" value="cartao" id="cartao">
 
                         CARTÃO
 
                     </label>
+
+                </div>
+
+
+                <div id="dados-cartao" class="dados-pagamento">
+
+                    <div class="campo">
+
+                        <label for="numero-cartao">Número do cartão</label>
+
+                        <input type="text" id="numero-cartao" placeholder="0000 0000 0000 0000">
+
+                    </div>
+
+
+                    <div class="campo">
+
+                        <label for="nome-cartao">Nome no cartão</label>
+
+                        <input type="text" id="nome-cartao" placeholder="Nome completo">
+
+                    </div>
+
+
+                    <div class="linha-campos">
+
+                        <div class="campo">
+
+                            <label for="validade-cartao">Validade</label>
+
+                            <input type="text" id="validade-cartao" placeholder="MM/AA">
+
+                        </div>
+
+
+                        <div class="campo">
+
+                            <label for="cvv-cartao">CVV</label>
+
+                            <input type="text" id="cvv-cartao" placeholder="CVV">
+
+                        </div>
+
+                    </div>
 
                 </div>
 
