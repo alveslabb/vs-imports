@@ -63,6 +63,95 @@ app.get("/frete", async (req, res) => {
 
 });
 
+
+app.get("/teste-asaas", async (req, res) => {
+
+    try {
+
+        const resposta = await fetch("https://api.asaas.com/v3/customers?limit=1", {
+
+            headers: {
+                "access_token": process.env.ASAAS_API_KEY,
+                "accept": "application/json"
+            }
+
+        });
+
+        const dados = await resposta.json();
+
+        res.status(resposta.status).json(dados);
+
+    } catch (erro) {
+
+        res.status(500).json({
+            erro: erro.message
+        });
+
+    }
+
+});
+
+
+app.post("/criar-cobranca", async (req, res) => {
+
+    try {
+
+        const valor = Number(req.body.valor);
+
+        if (!valor || valor <= 0) {
+
+            return res.status(400).json({
+                erro: "Valor inválido."
+            });
+
+        }
+
+
+        const resposta = await fetch("https://api.asaas.com/v3/paymentLinks", {
+
+            method: "POST",
+
+            headers: {
+                "access_token": process.env.ASAAS_API_KEY,
+                "accept": "application/json",
+                "content-type": "application/json"
+            },
+
+            body: JSON.stringify({
+
+                name: "Pedido VS Imports",
+
+                description: "Compra na VS Imports",
+
+                value: valor,
+
+                billingType: "PIX",
+
+                chargeType: "DETACHED",
+
+                dueDateLimitDays: 1
+
+            })
+
+        });
+
+
+        const dados = await resposta.json();
+
+        res.status(resposta.status).json(dados);
+
+
+    } catch (erro) {
+
+        res.status(500).json({
+            erro: erro.message
+        });
+
+    }
+
+});
+
+
 app.listen(3000, () => {
     console.log("Servidor rodando em http://localhost:3000");
 });
