@@ -1,15 +1,72 @@
-const botao = document.querySelector(".adicionar-carrinho");
+console.log("index.js funcionando");
 
-botao.addEventListener("click", function() {
+const produtos = document.querySelectorAll(".produto");
 
-    const produto = {
-        nome: botao.dataset.nome,
-        preco: Number(botao.dataset.preco),
-        imagem: "imagens/miami.png"
-    };
+produtos.forEach(function(produto) {
 
-    localStorage.setItem("produtoCarrinho", JSON.stringify(produto));
+    const botoesTamanho = produto.querySelectorAll(".tamanho");
+    const botaoCarrinho = produto.querySelector(".adicionar-carrinho");
 
-    window.location.href = "carrinho.html";
+    let tamanhoSelecionado = "";
+
+    botoesTamanho.forEach(function(botao) {
+
+        botao.addEventListener("click", function() {
+
+            botoesTamanho.forEach(function(outroBotao) {
+
+                outroBotao.classList.remove("selecionado");
+
+            });
+
+            botao.classList.add("selecionado");
+
+            tamanhoSelecionado = botao.dataset.tamanho;
+
+        });
+
+    });
+
+
+    botaoCarrinho.addEventListener("click", function() {
+
+        if (tamanhoSelecionado === "") {
+
+            alert("Selecione um tamanho.");
+
+            return;
+
+        }
+
+
+        const produtoCarrinho = {
+
+            nome: botaoCarrinho.dataset.nome,
+
+            preco: Number(botaoCarrinho.dataset.preco),
+
+            tamanho: tamanhoSelecionado,
+
+            imagem: produto.querySelector(".produto-img img").src
+
+        };
+
+
+        localStorage.setItem(
+            "produtoCarrinho",
+            JSON.stringify(produtoCarrinho)
+        );
+
+        localStorage.setItem(
+            "quantidadeCarrinho",
+            "1"
+        );
+
+        localStorage.removeItem("freteCarrinho");
+
+
+        window.location.href = "carrinho.html";
+
+    });
 
 });

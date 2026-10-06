@@ -29,7 +29,13 @@ if (produtoSalvo) {
 
                 <h3>${produto.nome}</h3>
 
-                <p>R$ ${produto.preco.toFixed(2).replace(".", ",")}</p>
+                <p>
+                    Tamanho: <strong>${produto.tamanho}</strong>
+                </p>
+
+                <p>
+                    R$ ${produto.preco.toFixed(2).replace(".", ",")}
+                </p>
 
                 <div class="quantidade">
 

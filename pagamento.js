@@ -142,3 +142,65 @@ cartao.addEventListener("change", function() {
     }
 
 });
+const finalizarPedido = document.querySelector("#finalizar-pedido");
+
+const nome = document.querySelector("#nome");
+const email = document.querySelector("#email");
+const cpf = document.querySelector("#cpf");
+
+const numero = document.querySelector("#numero");
+const complemento = document.querySelector("#complemento");
+
+const numeroCartao = document.querySelector("#numero-cartao");
+const nomeCartao = document.querySelector("#nome-cartao");
+const validadeCartao = document.querySelector("#validade-cartao");
+const cvvCartao = document.querySelector("#cvv-cartao");
+
+
+finalizarPedido.addEventListener("click", function() {
+
+    if (nome.value === "" ||
+        email.value === "" ||
+        cpf.value === "" ||
+        cepPagamento.value === "" ||
+        endereco.value === "" ||
+        numero.value === "" ||
+        cidade.value === "" ||
+        estado.value === "") {
+
+        alert("Preencha todos os dados obrigatórios.");
+
+        return;
+
+    }
+
+
+    if (!pix.checked && !cartao.checked) {
+
+        alert("Escolha uma forma de pagamento.");
+
+        return;
+
+    }
+
+
+    if (cartao.checked) {
+
+        if (numeroCartao.value === "" ||
+            nomeCartao.value === "" ||
+            validadeCartao.value === "" ||
+            cvvCartao.value === "") {
+
+            alert("Preencha todos os dados do cartão.");
+
+            return;
+
+        }
+
+    }
+
+
+    alert("Pedido realizado com sucesso!");
+
+
+});
