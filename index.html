@@ -1,80 +1,130 @@
 <!DOCTYPE html>
+
 <html lang="pt-br">
 
 <head>
+
     <meta charset="UTF-8">
+
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <title>VS Imports</title>
 
     <link rel="stylesheet" href="style.css">
+
 </head>
 
 <body>
 
     <!-- BARRA DE AVISO -->
+
     <div class="barra">
-        FRETE GRÁTIS • COMPRA SEGURA • PRODUTOS ORIGINAIS
+
+        FRETE GRÁTIS • COMPRA SEGURA • PRODUTOS ORIGINAIS e RP
+
     </div>
 
     <!-- CABEÇALHO -->
+
     <header>
 
         <div class="logo">
+
             <img src="imagens/inicio2.png" alt="VS Imports">
+
         </div>
 
         <nav>
+
             <a href="index.html">INÍCIO</a>
+
             <a href="produtos.html">PRODUTOS</a>
+
             <a href="sobre.html">SOBRE</a>
+
             <a href="contato.html">CONTATO</a>
+
         </nav>
 
         <div class="acoes">
+
             <button>⌕</button>
+
             <button>♡</button>
-            <button></button>
+
+            <a href="carrinho.html" class="botao-carrinho" aria-label="Carrinho">
+
+                <svg viewBox="0 0 24 24" aria-hidden="true">
+
+                    <path d="M3 4h2l2.1 10.1a2 2 0 0 0 2 1.6h8.7a2 2 0 0 0 1.9-1.4L22 8H6" />
+
+                    <path d="M9 19h.01M18 19h.01" />
+
+                    <path d="M8 11h11M10 8l1 7M16 8l-1 7" />
+
+                </svg>
+
+            </a>
+
         </div>
 
     </header>
 
 
-
-
-
     <!-- CATEGORIAS -->
+
     <section class="categorias">
 
         <div class="titulo">
+
             <p>CATEGORIAS</p>
+
             <h2>ENCONTRE SEU ESTILO</h2>
+
         </div>
 
         <div class="categorias-grid">
 
             <a href="velejador.html" class="categoria">
+
                 <img src="imagens/velejador.png" alt="Camisas">
+
                 <div>
+
                     <h3>VELEJADOR</h3>
+
                     <span>VER COLEÇÃO →</span>
+
                 </div>
+
             </a>
 
             <a href="moletom.html" class="categoria">
+
                 <img src="imagens/moletom.png" alt="Moletons">
+
                 <div>
+
                     <h3>MOLETONS</h3>
+
                     <span>VER COLEÇÃO →</span>
+
                 </div>
+
             </a>
 
             <a href="calça.html" class="categoria">
+
                 <img src="imagens/calca.png" alt="Shorts">
+
                 <div>
+
                     <h3>CALÇAS</h3>
+
                     <span>VER COLEÇÃO →</span>
+
                 </div>
+
             </a>
 
         </div>
@@ -83,16 +133,21 @@
 
 
     <!-- PRODUTOS -->
+
     <section class="produtos">
 
         <div class="titulo produtos-titulo">
+
             <p>DESTAQUES</p>
 
             <h2>MAIS VENDIDOS</h2>
 
             <a href="produtos.html">
+
                 VER TODOS →
+
             </a>
+
         </div>
 
 
@@ -101,14 +156,27 @@
             <div class="produto">
 
                 <div class="produto-img">
+
                     <span>NOVO</span>
 
                     <img src="imagens/miami.png" alt="Suéter Miami Open">
+
                 </div>
 
                 <div class="produto-info">
+
                     <h3>SUÉTER MIAMI OPEN</h3>
+
                     <p>R$ 199,99</p>
+
+                    <button class="adicionar-carrinho"
+                        data-nome="SUÉTER MIAMI OPEN"
+                        data-preco="199.99">
+
+                        ADICIONAR AO CARRINHO
+
+                    </button>
+
                 </div>
 
             </div>
@@ -123,8 +191,11 @@
                 </div>
 
                 <div class="produto-info">
+
                     <h3>SUÉTER LACOSTE</h3>
+
                     <p>R$ 199,99</p>
+
                 </div>
 
             </div>
@@ -139,8 +210,11 @@
                 </div>
 
                 <div class="produto-info">
+
                     <h3>CAMISETA LACOSTE</h3>
+
                     <p>R$ 64,99</p>
+
                 </div>
 
             </div>
@@ -155,8 +229,11 @@
                 </div>
 
                 <div class="produto-info">
+
                     <h3>MOLETOM VS IMPORTS</h3>
+
                     <p>R$ 251,00</p>
+
                 </div>
 
             </div>
@@ -165,105 +242,224 @@
 
     </section>
 
+    <section class="produtos">
 
-    <!-- BANNER SECUNDÁRIO -->
-    <section class="colecao">
+        <div class="titulo produtos-titulo">
 
-        <img src="imagens/banner2.png" alt="Coleção VS Imports">
+            <p>DESTAQUES</p>
 
-        <div class="colecao-texto">
-
-            <p>VS IMPORTS</p>
-
-            <h2>
-                QUALIDADE<br>
-                EM CADA DETALHE.
-            </h2>
+            
 
             <a href="produtos.html">
-                CONHEÇA A COLEÇÃO
+
+
             </a>
+
+        </div>
+
+
+        <div class="produtos-grid">
+
+            <div class="produto">
+
+                <div class="produto-img">
+
+                    <span>NOVO</span>
+
+                    <img src="imagens/miami.png" alt="Suéter Miami Open">
+
+                </div>
+
+                <div class="produto-info">
+
+                    <h3>SUÉTER MIAMI OPEN</h3>
+
+                    <p>R$ 199,99</p>
+
+                    <button class="adicionar-carrinho"
+                        data-nome="SUÉTER MIAMI OPEN"
+                        data-preco="199.99">
+
+                        ADICIONAR AO CARRINHO
+
+                    </button>
+
+                </div>
+
+            </div>
+
+
+            <div class="produto">
+
+                <div class="produto-img">
+
+                    <img src="imagens/sueter.png" alt="Suéter Lacoste">
+
+                </div>
+
+                <div class="produto-info">
+
+                    <h3>SUÉTER LACOSTE</h3>
+
+                    <p>R$ 199,99</p>
+
+                </div>
+
+            </div>
+
+
+            <div class="produto">
+
+                <div class="produto-img">
+
+                    <img src="imagens/camiseta.png" alt="Camiseta Lacoste">
+
+                </div>
+
+                <div class="produto-info">
+
+                    <h3>CAMISETA LACOSTE</h3>
+
+                    <p>R$ 64,99</p>
+
+                </div>
+
+            </div>
+
+
+            <div class="produto">
+
+                <div class="produto-img">
+
+                    <img src="imagens/moletom-produto.png" alt="Moletom">
+
+                </div>
+
+                <div class="produto-info">
+
+                    <h3>MOLETOM VS IMPORTS</h3>
+
+                    <p>R$ 251,00</p>
+
+                </div>
+
+            </div>
 
         </div>
 
     </section>
 
-
     <!-- BENEFÍCIOS -->
+
     <section class="beneficios">
 
         <div>
+
             <strong>🚚</strong>
+
             <h3>ENVIO SEGURO</h3>
+
             <p>Enviamos seu pedido com segurança.</p>
+
         </div>
 
         <div>
+
             <strong>✓</strong>
+
             <h3>PRODUTOS ORIGINAIS</h3>
+
             <p>Trabalhamos com produtos selecionados.</p>
+
         </div>
 
         <div>
+
             <strong>🔒</strong>
+
             <h3>COMPRA SEGURA</h3>
+
             <p>Seus dados protegidos durante a compra.</p>
+
         </div>
 
     </section>
 
 
     <!-- RODAPÉ -->
+
     <footer>
 
         <div class="footer-top">
 
             <div class="footer-logo">
+
                 <img src="imagens/inicio2.png" alt="VS Imports">
 
                 <p>
+
                     Estilo, qualidade e produtos selecionados
+
                     para você.
+
                 </p>
+
             </div>
 
 
             <div>
+
                 <h3>MENU</h3>
 
                 <a href="index.html">Início</a>
+
                 <a href="produtos.html">Produtos</a>
+
                 <a href="sobre.html">Sobre nós</a>
+
                 <a href="contato.html">Contato</a>
+
             </div>
 
 
             <div>
+
                 <h3>CATEGORIAS</h3>
 
                 <a href="camisas.html">Camisas</a>
+
                 <a href="moletom.html">Moletons</a>
+
                 <a href="shorts.html">Shorts</a>
+
             </div>
 
 
             <div>
+
                 <h3>REDES SOCIAIS</h3>
 
                 <a href="#">Instagram</a>
+
                 <a href="#">TikTok</a>
+
                 <a href="#">WhatsApp</a>
+
             </div>
 
         </div>
 
 
         <div class="footer-bottom">
+
             <p>© 2026 VS Imports. Todos os direitos reservados.</p>
+
             <p>Feito por VS Imports</p>
+
         </div>
 
     </footer>
+<script src="index.js"></script>
 
 </body>
 

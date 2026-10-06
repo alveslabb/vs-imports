@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Carrinho | VS Imports</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <div class="barra">
+        FRETE GRÁTIS • COMPRA SEGURA • PRODUTOS ORIGINAIS
+    </div>
+
+    <header>
+
+        <div class="logo">
+            <img src="imagens/inicio2.png" alt="VS Imports">
+        </div>
+
+        <nav>
+            <a href="index.html">INÍCIO</a>
+            <a href="produtos.html">PRODUTOS</a>
+            <a href="sobre.html">SOBRE</a>
+            <a href="contato.html">CONTATO</a>
+        </nav>
+
+        <div class="acoes">
+
+            <button>⌕</button>
+
+            <button>♡</button>
+
+            <a href="carrinho.html" class="botao-carrinho" aria-label="Carrinho">
+                <svg viewBox="0 0 24 24" aria-hidden="true">
+                    <path d="M3 4h2l2.1 10.1a2 2 0 0 0 2 1.6h8.7a2 2 0 0 0 1.9-1.4L22 8H6" />
+                    <path d="M9 19h.01M18 19h.01" />
+                    <path d="M8 11h11M10 8l1 7M16 8l-1 7" />
+                </svg>
+            </a>
+
+        </div>
+
+    </header>
+
+
+    <main class="pagina-carrinho">
+
+        <div class="titulo">
+            <p>VS IMPORTS</p>
+            <h1>MEU CARRINHO</h1>
+        </div>
+
+
+        <div id="lista-carrinho" class="lista-carrinho">
+
+            <div class="carrinho-vazio">
+                <p>Seu carrinho está vazio.</p>
+
+                <a href="index.html">
+                    CONTINUAR COMPRANDO
+                </a>
+            </div>
+
+        </div>
+
+
+        <div class="calculo-frete">
+
+            <h3>CALCULE O FRETE</h3>
+
+            <div class="campo-frete">
+
+                <input type="text" id="cep" placeholder="Digite seu CEP">
+
+                <button id="calcular-frete">
+                    CALCULAR
+                </button>
+
+            </div>
+
+            <div id="resultado-frete"></div>
+
+        </div>
+
+
+        <div id="resumo-carrinho" class="resumo-carrinho">
+
+            <div>
+                <span>Subtotal</span>
+                <strong id="subtotal">R$ 0,00</strong>
+            </div>
+
+            <div>
+                <span>Frete</span>
+                <strong id="frete">R$ 0,00</strong>
+            </div>
+
+            <div class="total-carrinho">
+                <span>TOTAL</span>
+                <strong id="total">R$ 0,00</strong>
+            </div>
+
+            <button id="finalizar-compra">
+                CONTINUAR PARA PAGAMENTO
+            </button>
+
+        </div>
+
+    </main>
+
+
+    <footer>
+
+        <div class="footer-bottom">
+            <p>© 2026 VS Imports. Todos os direitos reservados.</p>
+            <p>Feito por VS Imports</p>
+        </div>
+
+    </footer>
+
+
+    <script src="carrinho.js"></script>
+
+</body>
+
+</html>
