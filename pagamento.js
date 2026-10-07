@@ -246,7 +246,7 @@ finalizarPedido.addEventListener("click", async function() {
 
 
         const resposta = await fetch(
-            "http://localhost:3000/criar-cobranca",
+            "https://vs-imports.onrender.com/criar-cobranca",
             {
 
                 method: "POST",
@@ -284,7 +284,7 @@ finalizarPedido.addEventListener("click", async function() {
 
 
         await fetch(
-            "http://localhost:3000/pedidos",
+            "https://vs-imports.onrender.com/pedidos",
             {
 
                 method: "POST",
@@ -336,6 +336,7 @@ finalizarPedido.addEventListener("click", async function() {
                 })
 
             }
+
         );
 
 
