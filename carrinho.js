@@ -12,6 +12,7 @@ const produtoSalvo = localStorage.getItem("produtoCarrinho");
 let valorProduto = 0;
 let quantidadeProduto = 1;
 let valorFrete = 0;
+let tipoFrete = "";
 
 
 if (produtoSalvo) {
@@ -20,41 +21,34 @@ if (produtoSalvo) {
 
     valorProduto = produto.preco;
 
-    listaCarrinho.innerHTML = `
-        <div class="produto-carrinho">
+    listaCarrinho.innerHTML =
+        '<div class="produto-carrinho">' +
 
-            <img src="${produto.imagem}" alt="${produto.nome}">
+            '<img src="' + produto.imagem + '" alt="' + produto.nome + '">' +
 
-            <div class="produto-carrinho-info">
+            '<div class="produto-carrinho-info">' +
 
-                <h3>${produto.nome}</h3>
+                '<h3>' + produto.nome + '</h3>' +
 
-                <p>
-                    Tamanho: <strong>${produto.tamanho}</strong>
-                </p>
+                '<p>Tamanho: <strong>' + produto.tamanho + '</strong></p>' +
 
-                <p>
-                    R$ ${produto.preco.toFixed(2).replace(".", ",")}
-                </p>
+                '<p>R$ ' + produto.preco.toFixed(2).replace(".", ",") + '</p>' +
 
-                <div class="quantidade">
+                '<div class="quantidade">' +
 
-                    <button id="diminuir">−</button>
+                    '<button id="diminuir">−</button>' +
 
-                    <span id="quantidade">1</span>
+                    '<span id="quantidade">1</span>' +
 
-                    <button id="aumentar">+</button>
+                    '<button id="aumentar">+</button>' +
 
-                </div>
+                '</div>' +
 
-                <button id="excluir-produto">
-                    EXCLUIR PRODUTO
-                </button>
+                '<button id="excluir-produto">EXCLUIR PRODUTO</button>' +
 
-            </div>
+            '</div>' +
 
-        </div>
-    `;
+        '</div>';
 
 
     const quantidade = document.querySelector("#quantidade");
@@ -75,12 +69,12 @@ if (produtoSalvo) {
         const novoSubtotal = valorProduto * quantidadeProduto;
 
         subtotal.innerHTML =
-            `R$ ${novoSubtotal.toFixed(2).replace(".", ",")}`;
+            "R$ " + novoSubtotal.toFixed(2).replace(".", ",");
 
         const novoTotal = novoSubtotal + valorFrete;
 
         total.innerHTML =
-            `R$ ${novoTotal.toFixed(2).replace(".", ",")}`;
+            "R$ " + novoTotal.toFixed(2).replace(".", ",");
 
     }
 
@@ -112,18 +106,16 @@ if (produtoSalvo) {
         localStorage.removeItem("produtoCarrinho");
         localStorage.removeItem("quantidadeCarrinho");
         localStorage.removeItem("freteCarrinho");
+        localStorage.removeItem("tipoFreteCarrinho");
 
-        listaCarrinho.innerHTML = `
-            <div class="carrinho-vazio">
+        listaCarrinho.innerHTML =
+            '<div class="carrinho-vazio">' +
 
-                <p>Seu carrinho está vazio.</p>
+                '<p>Seu carrinho está vazio.</p>' +
 
-                <a href="index.html">
-                    CONTINUAR COMPRANDO
-                </a>
+                '<a href="index.html">CONTINUAR COMPRANDO</a>' +
 
-            </div>
-        `;
+            '</div>';
 
         subtotal.innerHTML = "R$ 0,00";
         frete.innerHTML = "R$ 0,00";
@@ -132,6 +124,7 @@ if (produtoSalvo) {
         valorProduto = 0;
         quantidadeProduto = 1;
         valorFrete = 0;
+        tipoFrete = "";
 
     });
 
@@ -159,7 +152,7 @@ calcularFrete.addEventListener("click", async function() {
     try {
 
         const resposta = await fetch(
-            `http://localhost:3000/frete?cep=${valorCep}`
+            "http://localhost:3000/frete?cep=" + valorCep
         );
 
         const dados = await resposta.json();
@@ -167,50 +160,44 @@ calcularFrete.addEventListener("click", async function() {
         console.log(dados);
 
 
-        resultadoFrete.innerHTML = `
+        resultadoFrete.innerHTML =
 
-            <div class="opcao-frete">
+            '<div class="opcao-frete">' +
 
-                <label>
+                '<label>' +
 
-                    <input
-                        type="radio"
-                        name="frete"
-                        value="${dados[0].price}"
-                    >
+                    '<input type="radio" name="frete" value="' +
+                    dados[0].price +
+                    '">' +
 
-                    <span>PAC</span>
+                    '<span>PAC</span>' +
 
-                    <strong>
-                        R$ ${dados[0].price.toFixed(2).replace(".", ",")}
-                    </strong>
+                    '<strong>R$ ' +
+                    dados[0].price.toFixed(2).replace(".", ",") +
+                    '</strong>' +
 
-                </label>
+                '</label>' +
 
-            </div>
+            '</div>' +
 
 
-            <div class="opcao-frete">
+            '<div class="opcao-frete">' +
 
-                <label>
+                '<label>' +
 
-                    <input
-                        type="radio"
-                        name="frete"
-                        value="${dados[1].price}"
-                    >
+                    '<input type="radio" name="frete" value="' +
+                    dados[1].price +
+                    '">' +
 
-                    <span>SEDEX</span>
+                    '<span>SEDEX</span>' +
 
-                    <strong>
-                        R$ ${dados[1].price.toFixed(2).replace(".", ",")}
-                    </strong>
+                    '<strong>R$ ' +
+                    dados[1].price.toFixed(2).replace(".", ",") +
+                    '</strong>' +
 
-                </label>
+                '</label>' +
 
-            </div>
-
-        `;
+            '</div>';
 
 
         const opcoesFrete =
@@ -223,13 +210,24 @@ calcularFrete.addEventListener("click", async function() {
 
                 valorFrete = Number(this.value);
 
+                tipoFrete =
+                    this.parentElement.querySelector("span").innerText;
+
+
                 localStorage.setItem(
                     "freteCarrinho",
                     valorFrete
                 );
 
+
+                localStorage.setItem(
+                    "tipoFreteCarrinho",
+                    tipoFrete
+                );
+
+
                 frete.innerHTML =
-                    `R$ ${valorFrete.toFixed(2).replace(".", ",")}`;
+                    "R$ " + valorFrete.toFixed(2).replace(".", ",");
 
 
                 const valorTotal =
@@ -237,7 +235,7 @@ calcularFrete.addEventListener("click", async function() {
 
 
                 total.innerHTML =
-                    `R$ ${valorTotal.toFixed(2).replace(".", ",")}`;
+                    "R$ " + valorTotal.toFixed(2).replace(".", ",");
 
             });
 
@@ -261,3 +259,4 @@ finalizarCompra.addEventListener("click", function() {
     window.location.href = "pagamento.html";
 
 });
+

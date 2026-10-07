@@ -12,56 +12,68 @@ const quantidadeSalva = localStorage.getItem("quantidadeCarrinho");
 
 const freteSalvo = localStorage.getItem("freteCarrinho");
 
+const tipoFreteSalvo = localStorage.getItem("tipoFreteCarrinho");
+
+
+let produto;
+
+let quantidade = 1;
+
+let valorFrete = 0;
+
+let tipoFrete = "";
+
+let valorTotal = 0;
+
 
 if (produtoSalvo) {
 
-    const produto = JSON.parse(produtoSalvo);
+    produto = JSON.parse(produtoSalvo);
 
-    const quantidade = Number(quantidadeSalva) || 1;
+    quantidade = Number(quantidadeSalva) || 1;
 
-    const valorFrete = Number(freteSalvo) || 0;
+    valorFrete = Number(freteSalvo) || 0;
+
+    tipoFrete = tipoFreteSalvo || "";
 
     const subtotal = produto.preco * quantidade;
 
-    const total = subtotal + valorFrete;
+    valorTotal = subtotal + valorFrete;
 
 
-    produtoResumo.innerHTML = `
+    produtoResumo.innerHTML =
+        '<div class="produto-resumo">' +
 
-        <div class="produto-resumo">
+            '<img src="' + produto.imagem + '" alt="' + produto.nome + '">' +
 
-            <img src="${produto.imagem}" alt="${produto.nome}">
+            '<div>' +
 
-            <div>
+                '<h3>' + produto.nome + '</h3>' +
 
-                <h3>${produto.nome}</h3>
+                '<p>' +
+                    quantidade + "x R$ " +
+                    produto.preco.toFixed(2).replace(".", ",") +
+                '</p>' +
 
-                <p>
-                    ${quantidade}x R$ ${produto.preco.toFixed(2).replace(".", ",")}
-                </p>
+            '</div>' +
 
-            </div>
-
-        </div>
-
-    `;
+        '</div>';
 
 
     subtotalPagamento.innerHTML =
-        `R$ ${subtotal.toFixed(2).replace(".", ",")}`;
+        "R$ " + subtotal.toFixed(2).replace(".", ",");
 
 
     fretePagamento.innerHTML =
-        `R$ ${valorFrete.toFixed(2).replace(".", ",")}`;
+        tipoFrete + " - R$ " +
+        valorFrete.toFixed(2).replace(".", ",");
 
 
     totalPagamento.innerHTML =
-        `R$ ${total.toFixed(2).replace(".", ",")}`;
+        "R$ " + valorTotal.toFixed(2).replace(".", ",");
 
 }
 
-
-/* CEP */
 
 const cepPagamento = document.querySelector("#cep-pagamento");
 
@@ -76,7 +88,6 @@ cepPagamento.addEventListener("blur", async function() {
 
     const cep = cepPagamento.value.replace(/\D/g, "");
 
-
     if (cep.length !== 8) {
 
         return;
@@ -87,7 +98,7 @@ cepPagamento.addEventListener("blur", async function() {
     try {
 
         const resposta = await fetch(
-            `https://viacep.com.br/ws/${cep}/json/`
+            "https://viacep.com.br/ws/" + cep + "/json/"
         );
 
 
@@ -109,10 +120,8 @@ cepPagamento.addEventListener("blur", async function() {
 
         estado.value = dados.uf;
 
-    }
 
-
-    catch (erro) {
+    } catch (erro) {
 
         console.log(erro);
 
@@ -120,8 +129,6 @@ cepPagamento.addEventListener("blur", async function() {
 
 });
 
-
-/* FORMA DE PAGAMENTO */
 
 const pix = document.querySelector("#pix");
 
@@ -186,14 +193,16 @@ const cvvCartao = document.querySelector("#cvv-cartao");
 
 finalizarPedido.addEventListener("click", async function() {
 
-    if (nome.value === "" ||
+    if (
+        nome.value === "" ||
         email.value === "" ||
         cpf.value === "" ||
         cepPagamento.value === "" ||
         endereco.value === "" ||
         numero.value === "" ||
         cidade.value === "" ||
-        estado.value === "") {
+        estado.value === ""
+    ) {
 
         alert("Preencha todos os dados obrigatórios.");
 
@@ -213,10 +222,12 @@ finalizarPedido.addEventListener("click", async function() {
 
     if (cartao.checked) {
 
-        if (numeroCartao.value === "" ||
+        if (
+            numeroCartao.value === "" ||
             nomeCartao.value === "" ||
             validadeCartao.value === "" ||
-            cvvCartao.value === "") {
+            cvvCartao.value === ""
+        ) {
 
             alert("Preencha todos os dados do cartão.");
 
@@ -225,14 +236,6 @@ finalizarPedido.addEventListener("click", async function() {
         }
 
     }
-
-
-    const valorTotal = Number(
-        totalPagamento.innerText
-            .replace("R$", "")
-            .replace(".", "")
-            .replace(",", ".")
-    );
 
 
     try {
@@ -249,11 +252,15 @@ finalizarPedido.addEventListener("click", async function() {
                 method: "POST",
 
                 headers: {
+
                     "Content-Type": "application/json"
+
                 },
 
                 body: JSON.stringify({
+
                     valor: valorTotal
+
                 })
 
             }
@@ -274,6 +281,62 @@ finalizarPedido.addEventListener("click", async function() {
             return;
 
         }
+
+
+        await fetch(
+            "http://localhost:3000/pedidos",
+            {
+
+                method: "POST",
+
+                headers: {
+
+                    "Content-Type": "application/json"
+
+                },
+
+                body: JSON.stringify({
+
+                    cliente: nome.value,
+
+                    email: email.value,
+
+                    cpf: cpf.value,
+
+                    cep: cepPagamento.value,
+
+                    endereco: endereco.value,
+
+                    numero: numero.value,
+
+                    complemento: complemento.value,
+
+                    cidade: cidade.value,
+
+                    estado: estado.value,
+
+                    produto: produto.nome,
+
+                    tamanho: produto.tamanho,
+
+                    quantidade: quantidade,
+
+                    frete: valorFrete,
+
+                    tipoFrete: tipoFrete,
+
+                    total: valorTotal,
+
+                    pagamento: pix.checked ? "PIX" : "CARTÃO",
+
+                    status: "AGUARDANDO PAGAMENTO",
+
+                    paymentId: dados.id
+
+                })
+
+            }
+        );
 
 
         window.location.href = dados.url;
