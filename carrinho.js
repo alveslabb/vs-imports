@@ -152,7 +152,7 @@ calcularFrete.addEventListener("click", async function() {
     try {
 
         const resposta = await fetch(
-            "http://localhost:3000/frete?cep=" + valorCep
+            "https://vs-imports.onrender.com/frete?cep=" + valorCep
         );
 
         const dados = await resposta.json();
