@@ -1,13 +1,17 @@
+
 require("dotenv").config();
 
 const express = require("express");
 const cors = require("cors");
 const fs = require("fs");
+const path = require("path");
 
 const app = express();
 
 app.use(cors());
 app.use(express.json());
+
+app.use(express.static(path.join(__dirname, "..")));
 
 
 app.get("/frete", async (req, res) => {
@@ -18,7 +22,7 @@ app.get("/frete", async (req, res) => {
             method: "POST",
 
             headers: {
-                "Authorization": `Bearer ${process.env.SUPERFRETE_TOKEN}`,
+                "Authorization": "Bearer " + process.env.SUPERFRETE_TOKEN,
                 "User-Agent": "VS Imports - contato técnico",
                 "accept": "application/json",
                 "content-type": "application/json"
@@ -163,7 +167,7 @@ app.post("/criar-cobranca", async (req, res) => {
 app.post("/pedidos", (req, res) => {
 
     const pedidos = JSON.parse(
-        fs.readFileSync("./dados/pedidos.json", "utf8")
+        fs.readFileSync(path.join(__dirname, "../dados/pedidos.json"), "utf8")
     );
 
     const novoPedido = req.body;
@@ -173,7 +177,7 @@ app.post("/pedidos", (req, res) => {
     pedidos.push(novoPedido);
 
     fs.writeFileSync(
-        "./dados/pedidos.json",
+        path.join(__dirname, "../dados/pedidos.json"),
         JSON.stringify(pedidos, null, 4)
     );
 
@@ -185,7 +189,7 @@ app.post("/pedidos", (req, res) => {
 app.get("/pedidos", (req, res) => {
 
     const pedidos = JSON.parse(
-        fs.readFileSync("./dados/pedidos.json", "utf8")
+        fs.readFileSync(path.join(__dirname, "../dados/pedidos.json"), "utf8")
     );
 
     res.json(pedidos);
@@ -211,7 +215,7 @@ app.post("/webhook/asaas", (req, res) => {
     const paymentId = evento.payment.id;
 
     const pedidos = JSON.parse(
-        fs.readFileSync("./dados/pedidos.json", "utf8")
+        fs.readFileSync(path.join(__dirname, "../dados/pedidos.json"), "utf8")
     );
 
 
@@ -232,7 +236,7 @@ app.post("/webhook/asaas", (req, res) => {
     pedido.status = "PAGO";
 
     fs.writeFileSync(
-        "./dados/pedidos.json",
+        path.join(__dirname, "../dados/pedidos.json"),
         JSON.stringify(pedidos, null, 4)
     );
 
@@ -246,6 +250,6 @@ app.post("/webhook/asaas", (req, res) => {
 
 app.listen(3000, () => {
 
-    console.log("Servidor rodando em http://localhost:3000");
+    console.log("Servidor rodando na porta 3000");
 
 });
