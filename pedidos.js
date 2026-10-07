@@ -5,7 +5,7 @@ async function carregarPedidos() {
 
     try {
 
-        const resposta = await fetch("http://localhost:3000/pedidos");
+        const resposta = await fetch("https://vs-imports.onrender.com/pedidos");
 
         const pedidos = await resposta.json();
 
