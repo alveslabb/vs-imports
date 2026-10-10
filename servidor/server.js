@@ -1,4 +1,3 @@
-
 require("dotenv").config();
 
 const express = require("express");
@@ -18,7 +17,7 @@ app.get("/frete", async (req, res) => {
 
     try {
 
-        const resposta = await fetch("https://sandbox.superfrete.com/api/v0/calculator", {
+        const resposta = await fetch("https://api.superfrete.com/api/v0/calculator", {
             method: "POST",
 
             headers: {
@@ -50,8 +49,7 @@ app.get("/frete", async (req, res) => {
                 options: {
                     own_hand: false,
                     receipt: false,
-                    insurance_value: 199.99,
-                    use_insurance_value: true
+                    use_insurance_value: false
                 }
 
             })
@@ -116,7 +114,6 @@ app.post("/criar-cobranca", async (req, res) => {
 
         }
 
-
         const resposta = await fetch(
             "https://api.asaas.com/v3/paymentLinks",
             {
@@ -132,22 +129,16 @@ app.post("/criar-cobranca", async (req, res) => {
                 body: JSON.stringify({
 
                     name: "Pedido VS Imports",
-
                     description: "Compra na VS Imports",
-
                     value: valor,
-
                     billingType: "PIX",
-
                     chargeType: "DETACHED",
-
                     dueDateLimitDays: 1
 
                 })
 
             }
         );
-
 
         const dados = await resposta.json();
 
@@ -204,13 +195,11 @@ app.post("/webhook/asaas", (req, res) => {
     console.log("Webhook recebido:");
     console.log(evento);
 
-
     if (evento.event !== "PAYMENT_RECEIVED") {
 
         return res.sendStatus(200);
 
     }
-
 
     const paymentId = evento.payment.id;
 
@@ -218,11 +207,9 @@ app.post("/webhook/asaas", (req, res) => {
         fs.readFileSync(path.join(__dirname, "../dados/pedidos.json"), "utf8")
     );
 
-
     const pedido = pedidos.find(
         pedido => pedido.paymentId === paymentId
     );
-
 
     if (!pedido) {
 
@@ -232,14 +219,12 @@ app.post("/webhook/asaas", (req, res) => {
 
     }
 
-
     pedido.status = "PAGO";
 
     fs.writeFileSync(
         path.join(__dirname, "../dados/pedidos.json"),
         JSON.stringify(pedidos, null, 4)
     );
-
 
     console.log("Pedido atualizado para PAGO.");
 
