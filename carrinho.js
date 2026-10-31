@@ -207,13 +207,17 @@ calcularFrete.addEventListener("click", async function() {
     }
 
 });
-
-finalizarCompra.addEventListener("click", function() {
+    finalizarCompra.addEventListener("click", function() {
 
     const produto = localStorage.getItem("produtoCarrinho");
 
     if (!produto) {
         alert("Seu carrinho está vazio!");
+        return;
+    }
+
+    if (!tipoFrete || valorFrete <= 0) {
+        alert("Calcule o frete e selecione PAC ou SEDEX antes de continuar!");
         return;
     }
 
